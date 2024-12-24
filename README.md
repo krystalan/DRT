@@ -1,14 +1,15 @@
 # DRT-o1
 
 <p align="center">
-🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-7B">DRT-o1-7B</a>&nbsp&nbsp | &nbsp&nbsp🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-14B">DRT-o1-14B</a>&nbsp&nbsp | &nbsp&nbsp 📑 Paper (TBD)
+🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-7B">DRT-o1-7B</a>&nbsp&nbsp | &nbsp&nbsp🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-14B">DRT-o1-14B</a>&nbsp&nbsp | &nbsp&nbsp 📑 <a href="https://arxiv.org/abs/2412.17498">Paper</a>
 
 </p>
 
-This repository contains the resources for our paper "DRT-o1: Optimized Deep Reasoning Translation via Long Chain-of-Thought"
+This repository contains the resources for our paper ["DRT-o1: Optimized Deep Reasoning Translation via Long Chain-of-Thought"](https://arxiv.org/abs/2412.17498)
 
 
 ### Updates:
+- *2024.12.24*: We released [our paper](https://arxiv.org/abs/2412.17498). Check it out!
 - *2024.12.23*: We released our model checkpoints. 🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-7B">DRT-o1-7B</a> and 🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-14B">DRT-o1-14B</a>.
 
 
