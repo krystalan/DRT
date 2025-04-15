@@ -25,7 +25,7 @@ If you find this work is useful, please consider cite our paper:
   title={Deep Reasoning Translation via Reinforcement Learning},
   author={Wang, Jiaan and Meng, Fandong and Zhou, Jie},
   journal={arXiv preprint arXiv:2504.10187},
-  year={2024}
+  year={2025}
 }
 ```
 
