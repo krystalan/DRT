@@ -1,25 +1,37 @@
-# DRT-o1
+# DRT & DeepTrans
 
 <p align="center">
-🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-7B">DRT-o1-7B</a>&nbsp&nbsp | &nbsp&nbsp🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-8B">DRT-o1-8B</a>&nbsp&nbsp | &nbsp&nbsp🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-14B">DRT-o1-14B</a>&nbsp&nbsp | &nbsp&nbsp 📑 <a href="https://arxiv.org/abs/2412.17498">Paper</a>
+🤗 <a href="https://huggingface.co/Krystalan/DRT-7B">DRT-7B</a>&nbsp&nbsp | &nbsp&nbsp🤗 <a href="https://huggingface.co/Krystalan/DRT-8B">DRT-8B</a>&nbsp&nbsp | &nbsp&nbsp🤗 <a href="https://huggingface.co/Krystalan/DRT-14B">DRT-14B</a>&nbsp&nbsp | &nbsp&nbsp 🤗 DeepTrans-7B (soon)
 
 </p>
 
-This repository contains the resources for our paper ["DRT-o1: Optimized Deep Reasoning Translation via Long Chain-of-Thought"](https://arxiv.org/abs/2412.17498)
+This repository contains the resources for our work:
+- [DeepTrans: Deep Reasoning Translation via Reinforcement Learning](https://arxiv.org/abs/2504.10187)
+- [DRT: Deep Reasoning Translation via Long Chain-of-Thought](https://arxiv.org/abs/2412.17498)
 
 
-### Updates:
+
+<!-- ### Updates:
 - *2024.12.31*: We updated [our paper](https://arxiv.org/abs/2412.17498) with more detals and analyses. Check it out!
 - *2024.12.31*: We released the testing set of our work, please refer to `data/test.jsonl`
 - *2024.12.30*: We released a new model checkpoint using Llama-3.1-8B-Instruct as the backbone, i.e., 🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-8B">DRT-o1-8B</a>
 - *2024.12.24*: We released [our paper](https://arxiv.org/abs/2412.17498). Check it out!
-- *2024.12.23*: We released our model checkpoints. 🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-7B">DRT-o1-7B</a> and 🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-14B">DRT-o1-14B</a>.
+- *2024.12.23*: We released our model checkpoints. 🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-7B">DRT-o1-7B</a> and 🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-14B">DRT-o1-14B</a>. -->
 
 
 If you find this work is useful, please consider cite our paper:
 ```
+@article{wang2025deeptrans,
+  title={Deep Reasoning Translation via Reinforcement Learning},
+  author={Wang, Jiaan and Meng, Fandong and Zhou, Jie},
+  journal={arXiv preprint arXiv:2504.10187},
+  year={2024}
+}
+```
+
+```
 @article{wang2024drt,
-  title={DRT-o1: Optimized Deep Reasoning Translation via Long Chain-of-Thought},
+  title={DRT: Deep Reasoning Translation via Long Chain-of-Thought},
   author={Wang, Jiaan and Meng, Fandong and Liang, Yunlong and Zhou, Jie},
   journal={arXiv preprint arXiv:2412.17498},
   year={2024}
@@ -43,12 +55,12 @@ If you find this work is useful, please consider cite our paper:
 
 
 
-In this work, we introduce DRT-o1, an attempt to bring the success of long thought reasoning to neural machine translation (MT). To this end,
+In this work, we introduce DRT, an attempt to bring the success of long thought reasoning to neural machine translation (MT). To this end,
 - 🌟 We mine English sentences with similes or metaphors from existing literature books, which are suitable for translation via long thought.
 - 🌟 We propose a designed multi-agent framework with three agents (i.e., a translator, an advisor and an evaluator) to synthesize the MT samples with long thought. There are 22,264 synthesized samples in total.
-- 🌟 We train DRT-o1-8B, DRT-o1-7B and DRT-o1-14B using Llama-3.1-8B-Instruct, Qwen2.5-7B-Instruct and Qwen2.5-14B-Instruct as backbones.
+- 🌟 We train DRT-8B, DRT-7B and DRT-14B using Llama-3.1-8B-Instruct, Qwen2.5-7B-Instruct and Qwen2.5-14B-Instruct as backbones.
 
-> Our goal is not to achieve competitive performance with OpenAI’s O1 in neural machine translation (MT). Instead, we explore technical routes to bring the success of long thought to MT. To this end, we introduce DRT-o1, *a byproduct of our exploration*, and we hope it could facilitate the corresponding research in this direction.
+> Our goal is not to achieve competitive performance with OpenAI’s O1 in neural machine translation (MT). Instead, we explore technical routes to bring the success of long thought to MT. To this end, we introduce DRT, *a byproduct of our exploration*, and we hope it could facilitate the corresponding research in this direction.
 
 ![](./images/data_case.png)
 
@@ -59,9 +71,9 @@ In this work, we introduce DRT-o1, an attempt to bring the success of long thoug
 
 |  | Backbone | Model Access |
 | :--: | :--: | :--: |
-| DRT-o1-7B | 🤗 <a href="https://huggingface.co/Qwen/Qwen2.5-7B-Instruct">Qwen2.5-7B-Instruct</a> | 🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-7B">DRT-o1-7B</a> |
-| DRT-o1-8B | 🤗 <a href="https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct">Llama-3.1-8B-Instruct</a> | 🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-8B">DRT-o1-8B</a> |
-| DRT-o1-14B | 🤗 <a href="https://huggingface.co/Qwen/Qwen2.5-14B-Instruct">Qwen2.5-14B-Instruct</a> | 🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-14B">DRT-o1-14B</a> |
+| DRT-7B | 🤗 <a href="https://huggingface.co/Qwen/Qwen2.5-7B-Instruct">Qwen2.5-7B-Instruct</a> | 🤗 <a href="https://huggingface.co/Krystalan/DRT-7B">DRT-7B</a> |
+| DRT-8B | 🤗 <a href="https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct">Llama-3.1-8B-Instruct</a> | 🤗 <a href="https://huggingface.co/Krystalan/DRT-8B">DRT-8B</a> |
+| DRT-14B | 🤗 <a href="https://huggingface.co/Qwen/Qwen2.5-14B-Instruct">Qwen2.5-14B-Instruct</a> | 🤗 <a href="https://huggingface.co/Krystalan/DRT-14B">DRT-14B</a> |
 
 ### Model Performance
 |  | GRF | CometKiwi | GRB | BLEU | CometScore |
@@ -71,9 +83,9 @@ In this work, we introduce DRT-o1, an attempt to bring the success of long thoug
 | Qwen2.5-14B-Instruct | 84.74 | 72.01 | 80.85 | 30.23 | 78.84 |
 | Marco-o1-7B | 82.41 | 71.62 | 77.50 | 29.48 | 77.41 |
 | QwQ-32B-preview | 86.31 | 71.48 | 83.08 | 27.46 | 78.68 |
-| DRT-o1-8B | 84.49 | 70.85 | 80.80 | 32.67 | 78.81 |
-| DRT-o1-7B | 85.57 | 71.78 | 82.38 | 35.54 | 80.19 |
-| DRT-o1-14B | **87.19** | **72.11** | **83.20** | **36.46** | **80.64** |
+| DRT-8B | 84.49 | 70.85 | 80.80 | 32.67 | 78.81 |
+| DRT-7B | 85.57 | 71.78 | 82.38 | 35.54 | 80.19 |
+| DRT-14B | **87.19** | **72.11** | **83.20** | **36.46** | **80.64** |
 
 
 ### Model Prompts
@@ -81,7 +93,7 @@ During model inference, please use the following prompts:
 - System prompt: `You are a philosopher skilled in deep thinking, accustomed to exploring complex problems with profound insight.`
 - User prompt: `Please translate the following text from English to Chinese:\n[An English text]`
 
-DRT-o1 models will first generate the thought and then provide the final translation, with the following format:
+DRT models will first generate the thought and then provide the final translation, with the following format:
 ```
 <thought>
 [Reasoning process]
@@ -97,7 +109,7 @@ DRT-o1 models will first generate the thought and then provide the final transla
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-model_name = "Krystalan/DRT-o1-7B"
+model_name = "Krystalan/DRT-7B"
 
 model = AutoModelForCausalLM.from_pretrained(
     model_name,
@@ -167,7 +179,7 @@ print("Chat response:", chat_response)
 
 ## Translation Cases
 
-| Source Sentence | Qwen2.5-14B-Instruct | QwQ-32B-preview | DRT-o1-14B |
+| Source Sentence | Qwen2.5-14B-Instruct | QwQ-32B-preview | DRT-14B |
 | :--: | :--: | :--: | :--: |
 |Women were weeping and children crying, and all were going as fast as seemingly lay in their power, looking behind now and then as if pursued by some deadly enemy. | 妇女在哭泣，孩子们在哀号，所有人都似乎在尽全力快速前行，不时回头张望，仿佛背后有某个致命的敌人在追赶。 | 妇女们哭泣着，孩子们哭喊着，每个人都在尽力加快脚步，不时回头张望，仿佛背后有致命的敌人在追击。 | 妇女悲泣，孩童哀号，众人疾奔，不时回首，仿佛有致命之敌在后紧追。 |
 |Wait through this season of the rain Till suns of autumn dry the plain, Then shall thy giant foe, and all His host and realm, before thee fall. | 等待这雨季过去，直到秋日的阳光晒干原野，那时你的巨敌及其部众和王国都将倒在你面前。 | 忍过雨季漫长夜，待秋阳升空，晒干大地湿润色，那时，巨敌垮台，他的军队和王国，全在你脚下。 | 历尽这雨季，待秋日阳光驱散平原上的最后一丝湿润，那时，你那巨敌，连同他的军队与王国，都将匍匐在你脚下。 |
