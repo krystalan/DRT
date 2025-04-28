@@ -39,7 +39,7 @@ If you find this work is useful, please consider cite our paper:
 ```
 
 # Quick Links
-- [DRT](#drt)
+- [DRT: Deep Reasoning Translation via Long Chain-of-Thought](#drt)
     - [Introduction](#introduction)
     - [Models](#models)
         - [Model Access](#model-access)
@@ -48,7 +48,7 @@ If you find this work is useful, please consider cite our paper:
         - [Quickstart](#quickstart)
     - [Translation Cases](#translation-cases)
     - [Data](#data)
-- [DeepTrans](#deeptrans)
+- [DeepTrans: Deep Reasoning Translation via Reinforcement Learning](#deeptrans)
     - [Model Checkpoint](#model-checkpoint)
     - [Inference](#inference)
 - [License](#license)
