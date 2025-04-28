@@ -1,12 +1,12 @@
 # DRT & DeepTrans
 
 <p align="center">
-🤗 <a href="https://huggingface.co/Krystalan/DRT-7B">DRT-7B</a>&nbsp&nbsp | &nbsp&nbsp🤗 <a href="https://huggingface.co/Krystalan/DRT-8B">DRT-8B</a>&nbsp&nbsp | &nbsp&nbsp🤗 <a href="https://huggingface.co/Krystalan/DRT-14B">DRT-14B</a>&nbsp&nbsp | &nbsp&nbsp 🤗 DeepTrans-7B (soon)
+🤗 <a href="https://huggingface.co/Krystalan/DRT-7B">DRT-7B</a>&nbsp&nbsp | &nbsp&nbsp🤗 <a href="https://huggingface.co/Krystalan/DRT-8B">DRT-8B</a>&nbsp&nbsp | &nbsp&nbsp🤗 <a href="https://huggingface.co/Krystalan/DRT-14B">DRT-14B</a>&nbsp&nbsp | &nbsp&nbsp 🤗 <a href="https://huggingface.co/Krystalan/DeepTrans-7B">DeepTrans-7B</a>
 
 </p>
 
 This repository contains the resources for our work:
-- [DeepTrans: Deep Reasoning Translation via Reinforcement Learning](https://arxiv.org/abs/2504.10187)
+- [Deep Reasoning Translation via Reinforcement Learning](https://arxiv.org/abs/2504.10187)
 - [DRT: Deep Reasoning Translation via Long Chain-of-Thought](https://arxiv.org/abs/2412.17498)
 
 
@@ -38,16 +38,22 @@ If you find this work is useful, please consider cite our paper:
 }
 ```
 
-## Quick Links
-- [Introduction](#introduction)
-- [Models](#models)
-    - [Model Access](#model-access)
-    - [Model Performance](#model-performance)
-    - [Model Prompts](#model-prompts)
-    - [Quickstart](#quickstart)
-- [Translation Cases](#translation-cases)
-- [Data](#data)
+# Quick Links
+- [DRT](#drt)
+    - [Introduction](#introduction)
+    - [Models](#models)
+        - [Model Access](#model-access)
+        - [Model Performance](#model-performance)
+        - [Model Prompts](#model-prompts)
+        - [Quickstart](#quickstart)
+    - [Translation Cases](#translation-cases)
+    - [Data](#data)
+- [DeepTrans](#deeptrans)
+    - [Model Checkpoint](#model-checkpoint)
+    - [Inference](#inference)
 - [License](#license)
+
+# DRT
 
 ## Introduction
 
@@ -194,6 +200,93 @@ We release the testing set of our work, please refer to `data/test.jsonl`, where
 We will release the long-thought MT data as well as the data collection codes soon!
 
 
-## License
+# DeepTrans
+
+![](./images/deeptrans-reward-framework.png)
+
+In this work, we propose DeepTrans-7B, which aims at enhancing the free translation ability of deep reasoning LLMs via RL. To this end, we use DeepSeek-v3 (671B) as the reward model, and design scoring criteria on both translations and thought process.
+
+## Model Checkpoint
+
+|  | Backbone | Model Access |
+| :--: | :--: | :--: |
+| DeepTrans-7B | 🤗 <a href="https://huggingface.co/Qwen/Qwen2.5-7B-Instruct">Qwen2.5-7B-Instruct</a> | 🤗 <a href="https://huggingface.co/Krystalan/DeepTrans-7B">DeepTrans-7B</a> |
+
+## Inference
+
+- Huggingface Transformers
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_name = "Krystalan/DeepTrans-7B"
+
+model = AutoModelForCausalLM.from_pretrained(
+    model_name,
+    torch_dtype="auto",
+    device_map="auto"
+)
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+prompt = "你是一个翻译专家，擅长将英文翻译成中文。你在翻译过程中非常擅长思考，会先进行思考再给出翻译结果。你的输出格式为：\n<think>\n[思考过程]\n</think>[翻译结果]\n\n在你思考完之后，也就是</think>之后，你会给出最终的翻译即“[翻译结果]”，且[翻译结果]中不需要给出任何解释和描述，只需要提供英文的翻译结果。\n现在请你翻译以下这句英语：\n" + "The mother, with her feet propped up on a stool, seemed to be trying to get to the bottom of that answer, whose feminine profundity had struck her all of a heap."
+
+messages = [
+    {"role": "user", "content": prompt}
+]
+text = tokenizer.apply_chat_template(
+    messages,
+    tokenize=False,
+    add_generation_prompt=True
+)
+model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
+
+generated_ids = model.generate(
+    **model_inputs,
+    max_new_tokens=2048
+)
+generated_ids = [
+    output_ids[len(input_ids):] for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
+]
+
+response = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
+print(response)
+```
+
+- VLLM:
+deploying LLMs:
+```bash
+python3 -m vllm.entrypoints.openai.api_server --model [model_ckpt] --served-model-name [model_name]
+```
+
+calling LLMs:
+```python
+from openai import OpenAI
+# Set OpenAI's API key and API base to use vLLM's API server.
+openai_api_key = "EMPTY"
+openai_api_base = "http://localhost:8000/v1"
+
+client = OpenAI(
+    api_key=openai_api_key,
+    base_url=openai_api_base,
+)
+
+prompt = "你是一个翻译专家，擅长将英文翻译成中文。你在翻译过程中非常擅长思考，会先进行思考再给出翻译结果。你的输出格式为：\n<think>\n[思考过程]\n</think>[翻译结果]\n\n在你思考完之后，也就是</think>之后，你会给出最终的翻译即“[翻译结果]”，且[翻译结果]中不需要给出任何解释和描述，只需要提供英文的翻译结果。\n现在请你翻译以下这句英语：\n" + "The mother, with her feet propped up on a stool, seemed to be trying to get to the bottom of that answer, whose feminine profundity had struck her all of a heap."
+
+chat_response = client.chat.completions.create(
+    model=[model_name],
+    messages=[
+        {"role": "user", "content": prompt},
+    ],
+    temperature=0.1,
+    top_p=0.8,
+    max_tokens=2048,
+    extra_body={
+        "repetition_penalty": 1.05,
+    },
+)
+print("Chat response:", chat_response)
+```
+
+
+# License
 This work is licensed under cc-by-nc-sa-4.0
 
