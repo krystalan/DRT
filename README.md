@@ -1,25 +1,39 @@
-# DRT & DeepTrans
+# Deep Reasoning Translation (DRT) Project
 
 <p align="center">
-🤗 <a href="https://huggingface.co/Krystalan/DRT-7B">DRT-7B</a>&nbsp&nbsp | &nbsp&nbsp🤗 <a href="https://huggingface.co/Krystalan/DRT-8B">DRT-8B</a>&nbsp&nbsp | &nbsp&nbsp🤗 <a href="https://huggingface.co/Krystalan/DRT-14B">DRT-14B</a>&nbsp&nbsp | &nbsp&nbsp 🤗 <a href="https://huggingface.co/Krystalan/DeepTrans-7B">DeepTrans-7B</a>
+🤗 <a href="https://huggingface.co/Krystalan/DRT-7B">DRT-7B</a>&nbsp&nbsp | &nbsp&nbsp🤗 <a href="https://huggingface.co/Krystalan/DRT-8B">DRT-8B</a>&nbsp&nbsp | &nbsp&nbsp🤗 <a href="https://huggingface.co/Krystalan/DRT-14B">DRT-14B</a>&nbsp&nbsp | &nbsp&nbsp 🤗 <a href="https://huggingface.co/Krystalan/DeepTrans-7B">DeepTrans-7B</a> | &nbsp&nbsp 🤗 <a href="https://huggingface.co/Krystalan/ExTrans-7B">ExTrans-7B</a> | &nbsp&nbsp 🤗 <a href="https://huggingface.co/Krystalan/mExTrans-7B">mExTrans-7B</a>
 
 </p>
 
 This repository contains the resources for our work:
-- [Deep Reasoning Translation via Reinforcement Learning](https://arxiv.org/abs/2504.10187)
-- [DRT: Deep Reasoning Translation via Long Chain-of-Thought](https://arxiv.org/abs/2412.17498)
+- [**ExTrans**: Multilingual Deep Reasoning Translation via Exemplar-Enhanced Reinforcement Learning](https://arxiv.org/abs/2505.12996) (arXiv preprint 2025)
+- [**DeepTrans**: Deep Reasoning Translation via Reinforcement Learning](https://arxiv.org/abs/2504.10187) (arXiv preprint 2025)
+- [**DRT**: Deep Reasoning Translation via Long Chain-of-Thought](https://arxiv.org/abs/2412.17498) (ACL 2025 Findings)  
 
 
+Our exploration route is as follows:
 
-<!-- ### Updates:
-- *2024.12.31*: We updated [our paper](https://arxiv.org/abs/2412.17498) with more detals and analyses. Check it out!
-- *2024.12.31*: We released the testing set of our work, please refer to `data/test.jsonl`
-- *2024.12.30*: We released a new model checkpoint using Llama-3.1-8B-Instruct as the backbone, i.e., 🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-8B">DRT-o1-8B</a>
-- *2024.12.24*: We released [our paper](https://arxiv.org/abs/2412.17498). Check it out!
-- *2024.12.23*: We released our model checkpoints. 🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-7B">DRT-o1-7B</a> and 🤗 <a href="https://huggingface.co/Krystalan/DRT-o1-14B">DRT-o1-14B</a>. -->
+![](./images/exploration_route.png)
+
+### Updates:
+- *2025.05.27*: We released the full data of our DRT work, including the synthesized thought contents and translations. Please refer to `data/MetaphorTrans_*.jsonl`
+- *2025.05.19*: We released [ExTrans paper](https://arxiv.org/abs/2505.12996) with 🤗 <a href="https://huggingface.co/Krystalan/ExTrans-7B">ExTrans-7B</a> and 🤗 <a href="https://huggingface.co/Krystalan/mExTrans-7B">mExTrans-7B</a>. Check it out!
+- *2025.05.16*: Our [DRT paper](https://arxiv.org/abs/2412.17498) is accepted to **ACL 2025 Findings**.
+- *2025.04.14*: We released [DeepTrans paper](https://arxiv.org/abs/2504.10187) with 🤗 <a href="https://huggingface.co/Krystalan/DeepTrans-7B">DeepTrans-7B</a>. Check it out!
+- *2024.12.31*: We updated [DRT paper](https://arxiv.org/abs/2412.17498) with more detals and analyses. Check it out!
+- *2024.12.24*: We released [DRT paper](https://arxiv.org/abs/2412.17498) with 🤗 <a href="https://huggingface.co/Krystalan/DRT-7B">DRT-7B</a>, 🤗 <a href="https://huggingface.co/Krystalan/DRT-8B">DRT-8B</a> and 🤗 <a href="https://huggingface.co/Krystalan/DRT-14B">DRT-14B</a>. Check it out!
 
 
 If you find this work is useful, please consider cite our paper:
+```
+@article{wang2025extrans,
+  title={ExTrans: Multilingual Deep Reasoning Translation via Exemplar-Enhanced Reinforcement Learning},
+  author={Wang, Jiaan and Meng, Fandong and Zhou, Jie},
+  journal={arXiv preprint arXiv:2505.12996},
+  year={2025}
+}
+```
+
 ```
 @article{wang2025deeptrans,
   title={Deep Reasoning Translation via Reinforcement Learning},
@@ -47,10 +61,13 @@ If you find this work is useful, please consider cite our paper:
         - [Model Prompts](#model-prompts)
         - [Quickstart](#quickstart)
     - [Translation Cases](#translation-cases)
-    - [Data](#data)
+    - [Data (MetaphorTrans)](#data)
 - [DeepTrans: Deep Reasoning Translation via Reinforcement Learning](#deeptrans)
     - [Model Checkpoint](#model-checkpoint)
     - [Inference](#inference)
+- [ExTrans: Multilingual Deep Reasoning Translation via Exemplar-Enhanced Reinforcement Learning](#extrans)
+    - [ExTrans-7B inference](#inference-of-extrans)
+    - [mExTrans-7B inference](#inference-of-mextrans)
 - [License](#license)
 
 # DRT
@@ -195,9 +212,7 @@ print("Chat response:", chat_response)
 
 ## Data
 
-We release the testing set of our work, please refer to `data/test.jsonl`, where `en` indicates the English source sentences, and `zh` denotes the corresponding Chinese translation.
-
-We will release the long-thought MT data as well as the data collection codes soon!
+We release the synthesized data (named ```MetaphorTrans```), please refer to `data/MetaphorTrans_*.jsonl`, where `text` and `trans` denote the source English sentences and the target Chinese translations, respectively. `thought` indicates the thought content for MT.
 
 
 # DeepTrans
@@ -286,6 +301,108 @@ chat_response = client.chat.completions.create(
 print("Chat response:", chat_response)
 ```
 
+# ExTrans
+
+![](./images/extrans-reward-framework.png)
+
+In this work, we propose ExTrans-7B, which aims at enhancing the free translation ability of deep reasoning LLMs via **exemplar-enhanced** RL. In detail, for each training MT sample, we use DeepSeek-R1 (671B) to generate a exemplar translation, and compare the translation results of the policy model with the exemplar translations to provide rewards for the policy model.
+
+Moreover, we extend ExTrans-7B from English-to-Chinese translation into **multilingual settings** with 11 languages, *e.g.*, Chinese, English, Arabic, Czech, German, Spanish, French, Italian, Japanese, Russian and Korean. 
+
+The model checkpoints can be accessed from the following links:  
+|  | Backbone | Model Access |
+| :--: | :--: | :--: |
+| ExTrans-7B | 🤗 <a href="https://huggingface.co/Qwen/Qwen2.5-7B-Instruct">Qwen2.5-7B-Instruct</a> | 🤗 <a href="https://huggingface.co/Krystalan/ExTrans-7B">ExTrans-7B</a> |
+| mExTrans-7B | 🤗 <a href="https://huggingface.co/Qwen/Qwen2.5-7B-Instruct">Qwen2.5-7B-Instruct</a> | 🤗 <a href="https://huggingface.co/Krystalan/mExTrans-7B">mExTrans-7B</a> |
+
+
+## Inference of ExTrans
+
+deploying LLMs:
+```bash
+python3 -m vllm.entrypoints.openai.api_server --model [model_ckpt] --served-model-name [model_name]
+```
+
+calling LLMs:
+```python
+from openai import OpenAI
+# Set OpenAI's API key and API base to use vLLM's API server.
+openai_api_key = "EMPTY"
+openai_api_base = "http://localhost:8000/v1"
+
+client = OpenAI(
+    api_key=openai_api_key,
+    base_url=openai_api_base,
+)
+
+prompt = "你是一个翻译专家，擅长将英文翻译成中文。你在翻译过程中非常擅长思考，会先进行思考再给出翻译结果。你的输出格式为：\n<think>\n[思考过程]\n</think>[翻译结果]\n\n在你思考完之后，也就是</think>之后，你会给出最终的翻译即“[翻译结果]”，且[翻译结果]中不需要给出任何解释和描述，只需要提供英文的翻译结果。\n现在请你翻译以下这句英语：\n" + "The mother, with her feet propped up on a stool, seemed to be trying to get to the bottom of that answer, whose feminine profundity had struck her all of a heap."
+
+chat_response = client.chat.completions.create(
+    model=[model_name],
+    messages=[
+        {"role": "user", "content": prompt},
+    ],
+    temperature=0.1,
+    top_p=0.8,
+    max_tokens=2048,
+    extra_body={
+        "repetition_penalty": 1.05,
+    },
+)
+print("Chat response:", chat_response)
+```
+
+## Inference of mExTrans
+
+calling LLMs:
+```python
+from openai import OpenAI
+# Set OpenAI's API key and API base to use vLLM's API server.
+openai_api_key = "EMPTY"
+openai_api_base = "http://localhost:8000/v1"
+
+client = OpenAI(
+    api_key=openai_api_key,
+    base_url=openai_api_base,
+)
+
+lang2des = {
+    "ar": "阿拉伯语", # Arabic
+    "cs": "捷克语", # Czech
+    "de": "德语", # German
+    "en": "英语", # English
+    "es": "西班牙语", # Spanish
+    "fr": "法语", # French
+    "it": "意大利语", # Italian
+    "ja": "日语", # Japanese
+    "ko": "韩语", # Korean
+    "ru": "俄语", # Russian
+    "zh": "中文" # Chinese
+}
+
+current_src_lang = lang2des["en"] # set the source language
+current_trg_lang = lang2des["zh"] # set the target language
+
+current_sent = "The mother, with her feet propped up on a stool, seemed to be trying to get to the bottom of that answer, whose feminine profundity had struck her all of a heap." # the source sentence to be translated
+
+TRANS_PROMPT = "你是一个翻译专家，擅长将{current_src}翻译成{current_trg}。你在翻译过程中非常擅长思考，会先用中文进行思考再给出翻译结果。在你思考完之后，也就是</think>之后，你会给出最终的翻译，且最终的翻译结果中不需要给出任何解释和描述，只需要提供翻译结果。\n现在请你翻译以下这句{current_src}：\n{current_sent}"
+
+chat_response = client.chat.completions.create(
+    model=[model_name],
+    messages=[
+        {"role": "user", "content": TRANS_PROMPT.format(current_src=current_src_lang, current_trg=current_trg_lang, current_sent=current_sent)},
+    ],
+    temperature=0.1,
+    top_p=0.8,
+    max_tokens=2048,
+    extra_body={
+        "repetition_penalty": 1.05,
+    },
+)
+print("Chat response:", chat_response)
+```
+
+Note that, the prompt of mExTrans is slightly different from that of ExTrans.
 
 # License
 This work is licensed under cc-by-nc-sa-4.0
