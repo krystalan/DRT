@@ -320,7 +320,7 @@ print("Chat response:", chat_response)
 
 ## Book Data
 
-We purchase two electronic copies of two complete literature books, i.e., *The Essential O. Henry Collection* and *Orbital*, and evaluate model performance on these two books.
+We purchase electronic copies of two complete literature books, i.e., *The Essential O. Henry Collection* and *Orbital*, and evaluate model performance on these two books.
 
 We released the content of *The Essential O. Henry Collection* at `data/ohenry.txt`. For the content of *Orbital*, we cannot release it due to copyright protection. If you indeed need the data **only for research purposes**, please send an application email to jawang.nlp[at]gmail.com to obtain it.
 
