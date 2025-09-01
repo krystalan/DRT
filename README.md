@@ -6,9 +6,10 @@
 </p>
 
 This repository contains the resources for our work:
+- [**DeepTrans**: Deep Reasoning Translation via Reinforcement Learning](https://arxiv.org/abs/2504.10187) (**TACL 2025**)  
+- [**DRT**: Deep Reasoning Translation via Long Chain-of-Thought](https://arxiv.org/abs/2412.17498) (**ACL 2025 Findings**)  
 - [**ExTrans**: Multilingual Deep Reasoning Translation via Exemplar-Enhanced Reinforcement Learning](https://arxiv.org/abs/2505.12996) (arXiv preprint 2025)
-- [**DeepTrans**: Deep Reasoning Translation via Reinforcement Learning](https://arxiv.org/abs/2504.10187) (arXiv preprint 2025)
-- [**DRT**: Deep Reasoning Translation via Long Chain-of-Thought](https://arxiv.org/abs/2412.17498) (ACL 2025 Findings)  
+
 
 
 Our exploration route is as follows:
@@ -16,6 +17,7 @@ Our exploration route is as follows:
 ![](./images/exploration_route.png)
 
 ### Updates:
+- *2025.08.21*: Our [DeepTrans paper](https://arxiv.org/abs/2504.10187) is accepted to **TACL**.
 - *2025.05.27*: We released the full data of our DRT work, including the synthesized thought contents and translations. Please refer to `data/MetaphorTrans_*.jsonl`
 - *2025.05.19*: We released [ExTrans paper](https://arxiv.org/abs/2505.12996) with 🤗 <a href="https://huggingface.co/Krystalan/ExTrans-7B">ExTrans-7B</a> and 🤗 <a href="https://huggingface.co/Krystalan/mExTrans-7B">mExTrans-7B</a>. Check it out!
 - *2025.05.16*: Our [DRT paper](https://arxiv.org/abs/2412.17498) is accepted to **ACL 2025 Findings**.
@@ -26,15 +28,6 @@ Our exploration route is as follows:
 
 If you find this work is useful, please consider cite our paper:
 ```
-@article{wang2025extrans,
-  title={ExTrans: Multilingual Deep Reasoning Translation via Exemplar-Enhanced Reinforcement Learning},
-  author={Wang, Jiaan and Meng, Fandong and Zhou, Jie},
-  journal={arXiv preprint arXiv:2505.12996},
-  year={2025}
-}
-```
-
-```
 @article{wang2025deeptrans,
   title={Deep Reasoning Translation via Reinforcement Learning},
   author={Wang, Jiaan and Meng, Fandong and Zhou, Jie},
@@ -44,16 +37,39 @@ If you find this work is useful, please consider cite our paper:
 ```
 
 ```
-@article{wang2024drt,
-  title={DRT: Deep Reasoning Translation via Long Chain-of-Thought},
-  author={Wang, Jiaan and Meng, Fandong and Liang, Yunlong and Zhou, Jie},
-  journal={arXiv preprint arXiv:2412.17498},
-  year={2024}
+@inproceedings{wang-etal-2025-drt,
+    title = "{DRT}: Deep Reasoning Translation via Long Chain-of-Thought",
+    author = "Wang, Jiaan  and
+      Meng, Fandong  and
+      Liang, Yunlong  and
+      Zhou, Jie",
+    editor = "Che, Wanxiang  and
+      Nabende, Joyce  and
+      Shutova, Ekaterina  and
+      Pilehvar, Mohammad Taher",
+    booktitle = "Findings of the Association for Computational Linguistics: ACL 2025",
+    month = jul,
+    year = "2025",
+    address = "Vienna, Austria",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.findings-acl.351/",
+    doi = "10.18653/v1/2025.findings-acl.351",
+    pages = "6770--6782",
+    ISBN = "979-8-89176-256-5"
+}
+```
+
+```
+@article{wang2025extrans,
+  title={ExTrans: Multilingual Deep Reasoning Translation via Exemplar-Enhanced Reinforcement Learning},
+  author={Wang, Jiaan and Meng, Fandong and Zhou, Jie},
+  journal={arXiv preprint arXiv:2505.12996},
+  year={2025}
 }
 ```
 
 # Quick Links
-- [DRT: Deep Reasoning Translation via Long Chain-of-Thought](#drt)
+- [DRT: Deep Reasoning Translation via Long Chain-of-Thought (ACL 2025 Findings)](#drt)
     - [Introduction](#introduction)
     - [Models](#models)
         - [Model Access](#model-access)
@@ -62,9 +78,10 @@ If you find this work is useful, please consider cite our paper:
         - [Quickstart](#quickstart)
     - [Translation Cases](#translation-cases)
     - [Data (MetaphorTrans)](#data)
-- [DeepTrans: Deep Reasoning Translation via Reinforcement Learning](#deeptrans)
+- [DeepTrans: Deep Reasoning Translation via Reinforcement Learning (TACL)](#deeptrans)
     - [Model Checkpoint](#model-checkpoint)
     - [Inference](#inference)
+    - [Data](#book-data)
 - [ExTrans: Multilingual Deep Reasoning Translation via Exemplar-Enhanced Reinforcement Learning](#extrans)
     - [ExTrans-7B inference](#inference-of-extrans)
     - [mExTrans-7B inference](#inference-of-mextrans)
@@ -300,6 +317,12 @@ chat_response = client.chat.completions.create(
 )
 print("Chat response:", chat_response)
 ```
+
+## Book Data
+
+We purchase two electronic copies of two complete literature books, i.e., *The Essential O. Henry Collection* and *Orbital*, and evaluate model performance on these two books.
+
+We released the content of *The Essential O. Henry Collection* at `data/ohenry.txt`. For the content of *Orbital*, we cannot release it due to copyright protection. If you indeed need the data **only for research purposes**, please send an application email to jawang.nlp[at]gmail.com to obtain it.
 
 # ExTrans
 
